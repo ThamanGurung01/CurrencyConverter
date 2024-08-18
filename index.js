@@ -37,7 +37,7 @@ if (/^\d*$/.test(amtVal)) {
     let response= await fetch(URL);
     // console.log(response);
     let result= await response.json();
-    
+    console.log(result[fromCurr][toCurr]);
     let finalAmount= (amtVal*result[fromCurr][toCurr].toFixed(2));
     msg.innerText=`${amtVal} ${fromCurr.toUpperCase()} = ${finalAmount} ${toCurr.toUpperCase()}`;
 }else{
@@ -45,6 +45,7 @@ if (/^\d*$/.test(amtVal)) {
 
 }
  }
+ 
 const updateFlag=(element)=>{
   let currCode=element.value;
   let countryCode=countryList[currCode];
@@ -52,6 +53,27 @@ const updateFlag=(element)=>{
   let img= element.parentElement.querySelector("img");
   img.src=newSrc;
   }
+
+  doubleArrow.addEventListener("click",()=>{
+ let fromSelect=document.querySelector(".from select");
+ let toSelect=document.querySelector(".to select");
+
+//  console.log("Before Swap:");
+//  console.log("From currency (before):", fromSelect.value);
+//  console.log("To currency (before):", toSelect.value);
+    let temp=fromSelect.value;
+    fromSelect.value=toSelect.value;
+    toSelect.value=temp;
+
+// console.log("After Swap:");
+// console.log("From currency (after):", fromSelect.value);
+// console.log("To currency (after):", toSelect.value);
+
+updateExchangeRate();
+updateFlag(document.querySelector(".from select"));
+updateFlag(document.querySelector(".to select"));
+
+  });
 
   btn.addEventListener("click",(evt)=>{
 evt.preventDefault();
