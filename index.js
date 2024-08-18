@@ -37,7 +37,6 @@ if (/^\d*$/.test(amtVal)) {
     let response= await fetch(URL);
     // console.log(response);
     let result= await response.json();
-    console.log(result[fromCurr][toCurr]);
     let finalAmount= (amtVal*result[fromCurr][toCurr].toFixed(2));
     msg.innerText=`${amtVal} ${fromCurr.toUpperCase()} = ${finalAmount} ${toCurr.toUpperCase()}`;
 }else{
